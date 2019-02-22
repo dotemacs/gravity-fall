@@ -57,10 +57,10 @@
          (set level-switcher switcher)
          (set level-replay replay)
 
-         (set bg-music (love.audio.newSource "assets/alone.mp3"))
+         (set bg-music (love.audio.newSource "assets/alone.mp3" "static"))
          (: bg-music :setLooping true)
 
-         (set victory-music (love.audio.newSource "assets/victory.mp3"))
+         (set victory-music (love.audio.newSource "assets/victory.mp3" "static"))
          (: victory-music :setVolume 0.3))
 
  :create (fn [level-info]

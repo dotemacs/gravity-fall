@@ -98,7 +98,7 @@
 
   ;; intro stuff
   (set logo (love.graphics.newImage "assets/logo.png"))
-  (set intro-music (love.audio.newSource "assets/intro.mp3"))
+  (set intro-music (love.audio.newSource "assets/intro.mp3", "static"))
   (: intro-music :setVolume 0.3)
   (: intro-music :setLooping true)
   (set main-font (love.graphics.newImageFont
