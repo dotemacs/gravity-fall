@@ -253,7 +253,7 @@
 
    showing-instructions?
    (instructions-screen)
-   
+
    (second-screen)))
 
 (fn love.keypressed [key unicode]

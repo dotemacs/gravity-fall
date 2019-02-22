@@ -113,7 +113,7 @@
                 (and (= key "r")
                      (= level.state :complete))
                 (level-replay)))
- 
+
  :update (fn [level tt]
            ;; play music if we are not paying
            (when (and (not (: bg-music :isPlaying))
@@ -135,7 +135,7 @@
                     (math.min
                      10000
                      (+ level.survival-score-offered (math.floor (* tt 1000)))))
-               
+
                (set level.duration (+ level.duration tt))
 
                ;; apply any forces due to gravity on the ship
@@ -201,14 +201,14 @@
              ;; if there's a resource collision add score
              (set level.resource-score
                   (+ level.resource-score (* 50000 resource-collides)))
-             
+
              (when (and (= level.state :in-flight)
                         full-collide?)
                (trigger-game-over level))))
 
  :reset (fn [level]
           (reset-level level))
- 
+
  :draw (fn [level]
          (each [k p (ipairs level.planets)]
            (planet.draw p))
