@@ -71,16 +71,16 @@
                     :tile 2}]
          :vortex {:x 600 :y 100 :radius 50}}])
 
-(defn move-to-next-level []
+(lambda move-to-next-level []
   (set current-level (+ current-level 1))
   (if (> current-level 5)
       (set ended? true)
       (set active-level (level.create (. levels current-level)))))
 
-(defn replay-level []
+(lambda replay-level []
   (set active-level (level.create (. levels current-level))))
 
-(defn start-game []
+(lambda start-game []
   (set active-level (level.create (. levels current-level))))
 
 (fn love.load []
@@ -107,13 +107,13 @@
                       "ABCDEFGHIJKLMNOPQRSTUVWXYZ0"
                       "123456789.,!?-+/():;%&`'*#=[]\""))))
 
-(defn center-text [s r]
+(lambda center-text [s r]
   (let [w (/ (love.graphics.getWidth) 2)
         t (love.graphics.newText main-font s)
         x (math.floor (- w (/ (: t :getWidth) 2)))]
     (love.graphics.print s x r)))
 
-(defn main-screen []
+(lambda main-screen []
   (starfield.draw blinky-stars)
   (love.graphics.draw logo
                       (/ (- (love.graphics.getWidth)
@@ -127,12 +127,12 @@
 (var text-render-offset 600)
 (var intro-text-opacity 255)
 
-(defn offsetted-text [s offset color]
+(lambda offsetted-text [s offset color]
   (tset color 4 intro-text-opacity)
   (love.graphics.setColor (unpack color))
   (love.graphics.print s 20 (math.floor  (+ text-render-offset (* 20 offset)))))
 
-(defn render-text []
+(lambda render-text []
   (let [s 0]
     (offsetted-text "Year: 3880 A.D. GAT, 34.33.090 STANDARD GALACTIC" s [0 255 0])
 
@@ -161,7 +161,7 @@
     (love.graphics.setColor 255 255 255 255)
     (center-text "Press the SPACE key to continue." (math.floor (+ text-render-offset 700)))))
 
-(defn second-screen []
+(lambda second-screen []
   (starfield.draw blinky-stars)
   (render-text))
 
@@ -175,14 +175,14 @@
   (when (< text-render-offset -100)
     (let [new-op (math.max 0 (- intro-text-opacity (* 50 t)))]
       (set intro-text-opacity new-op)))
-  
+
   (if (> text-render-offset -200)
       (set text-render-offset (- text-render-offset (* 20 t)))
       nil)
 
   )
 
-(defn game-screen-update [t]
+(lambda game-screen-update [t]
   (starfield.update blinky-stars t)
   (level.update active-level t))
 
@@ -191,11 +191,11 @@
   (love.graphics.setColor 255 255 255 255)
   (level.draw active-level))
 
-(defn instructions-screen-update [t]
+(lambda instructions-screen-update [t]
   (starfield.update blinky-stars t)
   (vortext.update inst-vortex t))
 
-(defn instructions-screen []
+(lambda instructions-screen []
   (starfield.draw blinky-stars)
   (love.graphics.setColor 255 255 255 255)
   (center-text "GOAL: Pick up as many planetary resources as possible and reach the" 50)
@@ -217,7 +217,7 @@
 
   (center-text "When ready, press the SPACE key." 380))
 
-(defn thanks-screen []
+(lambda thanks-screen []
   (love.graphics.setColor 255 255 255 255)
   (center-text "Thanks for playing!" 20)
   (center-text "Attributions" 60)

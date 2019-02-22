@@ -13,7 +13,7 @@
 (var level-switcher nil)
 (var level-replay nil)
 
-(defn find-mouse-intersect-planet [planets]
+(lambda find-mouse-intersect-planet [planets]
   (let [x (love.mouse.getX)
         y (love.mouse.getY)]
     (lume.first
@@ -24,10 +24,10 @@
                                  (<= y1 y y2))
                         p)))))))
 
-(defn launch-level [level]
+(lambda launch-level [level]
   (set level.state :in-flight))
 
-(defn reset-level [level]
+(lambda reset-level [level]
   (set level.state :awaiting-launch)
   (set level.duration 0)
   (set level.ship (ship.create level.level-info.ship.vx
@@ -37,13 +37,13 @@
   (each [k p (ipairs level.planets)]
     (planet.reset p)))
 
-(defn trigger-game-over [level]
+(lambda trigger-game-over [level]
   ;; when game is over due to crash, first the game state goes to
   ;; :crash, we need to tell the ship that it needs to animate to crash
   (set level.state :crashed)
   (ship.trigger-crash level.ship))
 
-(defn finish-level [level]
+(lambda finish-level [level]
   (ship.fall-into-vortex level.ship
                          [level.level-info.vortex.x
                           level.level-info.vortex.y])
